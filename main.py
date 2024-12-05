@@ -1,11 +1,11 @@
 import tkinter as tk
 from tkinter import messagebox
+from tkinter import ttk
 import random
 import hashlib
 
 # Utility functions for encryption and decryption
 def rotate_left(value: int, shift: int, size: int = 32):
-    """Performs a cyclic left shift."""
     return ((value << shift) | (value >> (size - shift))) & ((1 << size) - 1)
 
 def generate_permutation():
@@ -69,38 +69,39 @@ def decrypt_message():
 
 # Create GUI
 root = tk.Tk()
-root.title("Simple Encryption Interface")
-root.geometry("600x400")
-root.configure(bg="#E0F7FA")
+root.title("Enhanced Encryption Interface")
+root.geometry("1000x600")
+root.configure(bg="#F0F8FF")
 root.resizable(False, False)
 
-# Static Key Input
-tk.Label(root, text="Enter Key:", bg="#E0F7FA", font=("Arial", 12)).place(x=20, y=20)
-key_entry = tk.Entry(root, width=40, font=("Arial", 12))
-key_entry.place(x=120, y=20)
-tk.Button(root, text="Generate Key", bg="#0288D1", fg="white", font=("Arial", 10),
-          command=generate_key).place(x=460, y=18)
+# Header
+header = tk.Label(root, text="Simple Encryption Tool", bg="#4682B4", fg="white", font=("Arial", 16), pady=10)
+header.pack(fill="x")
+
+# Key Input
+frame = tk.Frame(root, bg="#000000", padн=120)
+frame.pack(fill="both", expand=True)
+
+tk.Label(frame, text="Enter Key:", bg="#F0F8FF", font=("Arial", 12)).grid(row=0, column=0, sticky="w", padx=10, pady=5)
+key_entry = tk.Entry(frame, width=40, font=("Arial", 12), relief="solid")
+key_entry.grid(row=0, column=1, padx=10, pady=5)
+tk.Button(frame, text="Generate Key", bg="#4682B4", fg="white", font=("Arial", 10), command=generate_key).grid(row=0, column=2, padx=10, pady=5)
 
 # Message Input
-tk.Label(root, text="Enter Message:", bg="#E0F7FA", font=("Arial", 12)).place(x=20, y=80)
-message_entry = tk.Entry(root, width=60, font=("Arial", 12))
-message_entry.place(x=20, y=110)
+tk.Label(frame, text="Enter Message:", bg="#F0F8FF", font=("Arial", 12)).grid(row=1, column=0, sticky="w", padx=10, pady=5)
+message_entry = tk.Entry(frame, width=60, font=("Arial", 12), relief="solid")
+message_entry.grid(row=1, column=1, columnspan=2, padx=10, pady=5)
 
-# Encrypt Button
-tk.Button(root, text="Encrypt", bg="#0288D1", fg="white", font=("Arial", 12),
-          command=encrypt_message).place(x=150, y=160)
+# Encrypt and Decrypt Buttons
+tk.Button(frame, text="Encrypt", bg="#008080", fg="white", font=("Arial", 12), command=encrypt_message).grid(row=2, column=0, padx=10, pady=20)
+tk.Button(frame, text="Decrypt", bg="#008080", fg="white", font=("Arial", 12), command=decrypt_message).grid(row=2, column=1, padx=10, pady=20)
 
-# Decrypt Button
-tk.Button(root, text="Decrypt", bg="#0288D1", fg="white", font=("Arial", 12),
-          command=decrypt_message).place(x=300, y=160)
+# Result Display
+encrypted_label = tk.Label(frame, text="Encrypted: ", bg="#F0F8FF", font=("Arial", 12), anchor="w")
+encrypted_label.grid(row=3, column=0, columnspan=3, sticky="w", padx=10, pady=5)
 
-# Encrypted Message Display
-encrypted_label = tk.Label(root, text="Encrypted:", bg="#E0F7FA", font=("Arial", 12))
-encrypted_label.place(x=20, y=220)
-
-# Decrypted Message Display
-decrypted_label = tk.Label(root, text="Decrypted:", bg="#E0F7FA", font=("Arial", 12))
-decrypted_label.place(x=20, y=270)
+decrypted_label = tk.Label(frame, text="Decrypted: ", bg="#F0F8FF", font=("Arial", 12), anchor="w")
+decrypted_label.grid(row=4, column=0, columnspan=3, sticky="w", padx=10, pady=5)
 
 # Run GUI
 root.mainloop()
