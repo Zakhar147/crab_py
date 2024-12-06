@@ -10,6 +10,9 @@ from settings import *
 
 class Interface: 
     
+    def _get_key(self):
+        return self.key_entry.get().encode('utf-8')
+    
     def _handle_generate_key(self):
         key = generate_key()
         self.key_entry.delete(0, tk.END)
@@ -75,7 +78,7 @@ class Interface:
             font=BUTTON_FONT,
             relief="solid",
             bd=1,
-            command=lambda: self._handle_encrypt(self.key_entry.get().encode('utf-8'), self.message_entry.get())
+            command=lambda: self._handle_encrypt(self._get_key(), self.message_entry.get())
         )
 
         encrypt_btn.place(relx=0.1, rely=0.53, relwidth=0.2, height=30)
@@ -88,7 +91,7 @@ class Interface:
             font=BUTTON_FONT,
             relief="solid",
             bd=1,
-            command =lambda: self._handle_decrypt(self.key_entry.get().encode('utf-8'), self.encrypted_message)
+            command =lambda: self._handle_decrypt(self._get_key(), self.encrypted_message)
         )
         self.decrypt_btn.place(relx=0.75, rely=0.53, relwidth=0.2, height=30)
 
