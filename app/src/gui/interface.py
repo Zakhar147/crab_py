@@ -1,9 +1,10 @@
 # interface.py
 import tkinter as tk
 from tkinter import messagebox
-from modules.crypto import encrypt_block_simple, decrypt_block_simple, generate_permutation, generate_s_array
+from modules.crypto import encrypt_block_simple, generate_permutation, generate_s_array
 from modules.utils import generate_key
-from config.settings import *
+from config.settings import WINDOW_TITLE, WINDOW_SIZE, BACKGROUND_COLOR, HEADER_FONT, TEXT_FONT, BUTTON_FONT
+
 
 def create_interface():
     global key_entry, message_entry, res_input
