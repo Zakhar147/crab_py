@@ -1,4 +1,4 @@
-from utils import rotate_left
+from crypto.utils import rotate_left
 
 def decrypt_block_simple(encrypted_block: bytes, P: list, S: list):
     X = [int.from_bytes(encrypted_block[i:i+4], 'little') for i in range(0, len(encrypted_block), 4)]
@@ -9,3 +9,10 @@ def decrypt_block_simple(encrypted_block: bytes, P: list, S: list):
     for i in range(len(X)):
         X[i] = rotate_left(X[i], 27) ^ S[i % len(S)]
     return b''.join(x.to_bytes(4, 'little') for x in X)
+
+
+def decrypt_message(key, encrypted_message, P, S):
+    if not encrypted_message or not key:
+        raise ValueError("Warning", "Please encrypt a message first.")       
+        
+    return decrypt_block_simple(encrypted_message, P, S).rstrip(b'\0')

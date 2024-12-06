@@ -15,5 +15,4 @@ def generate_s_array(key: bytes, size: int = 256):
     return S[:size]
 
 def generate_key(): 
-    return''.join(random.choices('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890', k=16))
-    return generated_key
+    return ''.join(random.choices('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890', k=16))
